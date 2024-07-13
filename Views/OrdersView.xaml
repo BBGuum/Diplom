@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="TrueDiplom.Views.OrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrueDiplom.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800" FontSize="14">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="OrderStatuses" Source="{Binding OrderStatuses}"/>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid x:Name="_dataGridOrders" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.ShowCheckOrderViewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OrdersView}}}"
+                                Background="Transparent" BorderThickness="0" Height="20" Width="20">
+                                <Image Source="/img/Buttons/ic-actions-bookmark@2x.png" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding UserEntity.Name}" Header="Клиент" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Номер заказа" Width="*"/>
+                <DataGridTextColumn Binding="{Binding DateGet}" Header="Дата приёма заказа" Width="*"/>
+                <DataGridTextColumn Binding="{Binding StatusEntity.Name}" Header="Статус" Width="*"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.ShowChangeStatusViewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OrdersView}}}"
+                                    CommandParameter="{Binding SelectedIndex, ElementName=_dataGridOrders}" Background="Transparent" BorderThickness="0" Height="20" Width="20">
+                                <Image Source="/img/Buttons/ic-actions-list-check@2x.png" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

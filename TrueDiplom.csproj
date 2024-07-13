@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="img\Buttons\ic-actions-add%402x.png" />
+    <None Remove="img\Buttons\ic-actions-add-file%402x.png" />
+    <None Remove="img\Buttons\ic-actions-add-simple%402x.png" />
+    <None Remove="img\Buttons\ic-actions-bag%402x.png" />
+    <None Remove="img\Buttons\ic-actions-bookmark%402x.png" />
+    <None Remove="img\Buttons\ic-actions-check-simple%402x.png" />
+    <None Remove="img\Buttons\ic-actions-close-simple%402x.png" />
+    <None Remove="img\Buttons\ic-actions-list-check%402x.png" />
+    <None Remove="img\Buttons\ic-actions-remove-simple%402x.png" />
+    <None Remove="img\Buttons\ic-actions-search%402x.png" />
+    <None Remove="img\Buttons\ic-actions-trash%402x.png" />
+    <None Remove="img\Buttons\ic-actions-user%402x.png" />
+    <None Remove="img\Buttons\ic-ecommerce-cart%402x.png" />
+    <None Remove="img\Buttons\ic-folder-locked%402x.png" />
+    <None Remove="img\Buttons\ic-folder-user%402x.png" />
+    <None Remove="img\Buttons\ic-shopping-house%402x.png" />
+    <None Remove="img\Buttons\ic-users-info%402x.png" />
+    <None Remove="img\null.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="img\Users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\Buttons\ic-actions-add-file@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-add-simple@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-add@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-bag@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-bookmark@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-check-simple@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-close-simple@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-list-check@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-remove-simple@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-search@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-trash@2x.png" />
+    <Resource Include="img\Buttons\ic-actions-user@2x.png" />
+    <Resource Include="img\Buttons\ic-ecommerce-cart@2x.png" />
+    <Resource Include="img\Buttons\ic-folder-locked@2x.png" />
+    <Resource Include="img\Buttons\ic-folder-user@2x.png" />
+    <Resource Include="img\Buttons\ic-shopping-house@2x.png" />
+    <Resource Include="img\Buttons\ic-users-info@2x.png" />
+    <Resource Include="img\null.png" />
+  </ItemGroup>
+
+</Project>

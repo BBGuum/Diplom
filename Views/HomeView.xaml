@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="TrueDiplom.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrueDiplom.Views"
+             xmlns:vm="clr-namespace:TrueDiplom.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid 
+        Grid.Row="0"
+        Background="LightGray">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Style>
+            </Grid.Resources>
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding ShowCatalogueViewCommand}"
+                Margin="2.5">
+                <Image Source="/img/Buttons/ic-shopping-house@2x.png"/>
+            </Button>
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding ShowUserProfileViewCommand}"
+                Margin="47.5 2.5 2.5 2.5">
+                <Image Source="/img/Buttons/ic-actions-user@2x.png" />
+            </Button>
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding ShowUsersViewCommand}"
+                Visibility="{Binding UsersViewVisibility}"
+                Margin="95 2.5 2.5 2.5">
+                <Image Source="/img/Buttons/ic-folder-user@2x.png" />
+            </Button>
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding ShowAddProductViewCommand}"
+                Visibility="{Binding AddProductViewVisibility}"
+                Margin="2.5 2.5 142.5 2.5">
+                <Image Source="/img/Buttons/ic-actions-add-file@2x.png" />
+            </Button>
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding ShowOrdersViewCommand}"
+                Visibility="{Binding OrdersViewVisibility}"
+                Margin="2.5 2.5 95 2.5">
+                <Image Source="/img/Buttons/ic-folder-locked@2x.png" />
+            </Button>
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding ShowUserOrdersViewCommand}"
+                Margin="2.5 2.5 47.5 2.5">
+                <Image Source="/img/Buttons/ic-actions-bag@2x.png" />
+            </Button>
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding ShowCartViewCommand}"
+                Margin="2.5">
+                <Image Source="/img/Buttons/ic-ecommerce-cart@2x.png" />
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ContentControl Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:CatologueVM}">
+                        <local:CatologueView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AddProductVM}">
+                        <local:AddProductView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:UserProfileVM}">
+                        <local:UserProfileView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:UsersVM}">
+                        <local:UsersView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:OrdersVM}">
+                        <local:OrdersView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:UserOrdersVM}">
+                        <local:UserOrdersView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:CartVM}">
+                        <local:CartView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProductVM}">
+                        <local:ProductView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:EditProductVM}">
+                        <local:EditProductView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:EditUserVM}">
+                        <local:EditUserView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+    </Grid>
+</UserControl>

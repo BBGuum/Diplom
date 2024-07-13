@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="TrueDiplom.Views.CartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrueDiplom.Views"
+             xmlns:ut="clr-namespace:TrueDiplom.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800" FontSize="14">
+    <UserControl.Resources>
+        <ut:NumberFormatConverter x:Key="NumberFormatConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding UserCart, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedItem="{Binding SelectedCartItem}" x:Name="_dataGridCart" 
+                  CanUserAddRows="False" AutoGenerateColumns="False" 
+                  IsReadOnly="True" CanUserResizeColumns="False"
+                  SelectionMode="Single" SelectionUnit="FullRow" GridLinesVisibility="None" 
+                  CanUserSortColumns="False" HeadersVisibility="Row">
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowHeaderStyle>
+                <Style TargetType="DataGridRowHeader">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate />
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.RowHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Товар" Binding="{Binding ProductEntity.Name}" Width="*"/>
+                <DataGridTemplateColumn Header="Цена" Width="0.1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding ProductEntity.Price, Converter={StaticResource NumberFormatConverter}}"/>
+                                <TextBlock Text=" руб."/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Количество" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Command="{Binding DataContext.IncrementCountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CartView}}}"
+                                        CommandParameter="{Binding SelectedIndex, ElementName=_dataGridCart}" 
+                                        BorderThickness="0" Background="Transparent"
+                                        Height="28">
+                                    <Image Source="/img/Buttons/ic-actions-add-simple@2x.png" Height="28"/>
+                                </Button>
+                                <TextBlock Text="{Binding Count}" VerticalAlignment="Center" Margin="5 0"/>
+                                <Button Command="{Binding DataContext.DecrementCountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CartView}}}"
+                                    CommandParameter="{Binding SelectedIndex, ElementName=_dataGridCart}" 
+                                    BorderThickness="0" Background="Transparent"
+                                        Height="28">
+                                    <Image Source="/img/Buttons/ic-actions-remove-simple@2x.png" Height="28"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding DataContext.RemoveProductCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CartView}}}"
+                                        CommandParameter="{Binding SelectedIndex, ElementName=_dataGridCart}" 
+                                        BorderThickness="0" Background="Transparent">
+                                    <Image Source="/img/Buttons/ic-actions-trash@2x.png"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1" Background="LightGray">
+            <Button
+                Command="{Binding ShowCheckOrderWindowCommand}"
+                Content="Оформить заказ" HorizontalAlignment="Center" 
+                Grid.Row="1" VerticalAlignment="Center" 
+                Height="30" Width="350"/>
+        </Grid>
+    </Grid>
+</UserControl>
